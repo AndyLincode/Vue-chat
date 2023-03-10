@@ -1,5 +1,17 @@
 <script setup>
+import { reactive } from "vue";
 import RoomHeader from "../components/ChatRoom/RoomHeader.vue";
+
+const data = reactive([
+  {
+    sender: "User2",
+    message: "Hello User1, Nice to meet you!",
+  },
+  {
+    sender: "User1",
+    message: "Hello User2! Nice to meet you, too!",
+  },
+]);
 </script>
 
 <template>
