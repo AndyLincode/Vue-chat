@@ -2,6 +2,10 @@
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
 import socket from "./composables/socket";
+import { useLogin } from '@/stores/auth';
+
+const auth = useLogin();
+const { user } = auth;
 
 socket.on("welcome", (msg) => {
   console.log(msg);
@@ -11,20 +15,16 @@ socket.on("welcome", (msg) => {
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <h2 class="userName">{{ user.login ? user.name : '未登入' }}</h2>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/chat">Chat</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
       </nav>
     </div>
   </header>
@@ -66,6 +66,10 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.userName {
+  color: #fff
 }
 
 @media (min-width: 1024px) {
